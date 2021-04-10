@@ -1,0 +1,5 @@
+body {
+  font-size: calc(0.75vh + 0.75vw);
+  padding: 0;
+  margin: 0;
+}
