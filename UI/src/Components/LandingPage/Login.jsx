@@ -1,9 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import Header from "../header/Header";
+import axios from "axios";
 import { Button } from "@material-ui/core";
 import SignupDark from "../../Assets/SignupDark.svg";
 import SignupLight from "../../Assets/SignupLight.svg";
+import { useState } from "react";
 const useStyles = makeStyles({
   mainContDark: {
     height: "100vh",
@@ -81,10 +83,24 @@ const Login = () => {
   var theme = useSelector((state) => {
     return state.ThemeChangeReducer.init;
   });
-  return (
+  var [signupbool, setsignupbool] = useState(false);
+  async function submit() {
+    try {
+      const response = await axios.post("/Login", {
+        Email: document.getElementById("Email").value,
+        Password: document.getElementById("Password").value,
+      });
+      console.log(response.data);
+      setsignupbool(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  return !signupbool ? (
     <div
       className={theme % 2 === 0 ? classes.mainContLight : classes.mainContDark}
     >
+      {console.log()}
       <Header />
       <h1
         style={theme % 2 === 0 ? { color: "black" } : { color: "white" }}
@@ -93,11 +109,7 @@ const Login = () => {
         Welcome Back
       </h1>
 
-      <form
-        action="http://localhost:8080/signUp"
-        className={classes.FormContent}
-        method="post"
-      >
+      <form className={classes.FormContent}>
         <h3
           className={classes.welcometext}
           style={theme % 2 === 0 ? { color: "black" } : { color: "white" }}
@@ -106,7 +118,7 @@ const Login = () => {
         </h3>
         <input
           className={theme % 2 !== 0 ? classes.inputLight : classes.inputDark}
-          id="UserId"
+          id="Email"
           required="true"
           name="name"
           placeholder="Username"
@@ -124,13 +136,13 @@ const Login = () => {
         <br />
         <Button
           className={theme % 2 === 0 ? classes.LightButton : classes.DarkButton}
-          type="submit"
           variant="contained"
+          onClick={submit}
         >
           Log in
         </Button>
       </form>
     </div>
-  );
+  ) : null;
 };
 export default Login;

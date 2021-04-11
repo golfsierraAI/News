@@ -1,10 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 import SignupDark from "../../Assets/SignupDark.svg";
 import SignupLight from "../../Assets/SignupLight.svg";
+import SignUpPage2 from "./SignUpPage2";
 import Header from "../header/Header";
 import { useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import { useState } from "react";
 const useStyles = makeStyles({
   mainContDark: {
     height: "100vh",
@@ -85,6 +87,7 @@ const useStyles = makeStyles({
   },
 });
 const SignUp = () => {
+  var [signupbool, setsignupbool] = useState(false);
   const classes = useStyles();
   var theme = useSelector((state) => {
     return state.ThemeChangeReducer.init;
@@ -97,12 +100,11 @@ const SignUp = () => {
         Email: document.getElementById("Email").value,
         Password: document.getElementById("Password").value,
       });
-      console.log(response.data);
+      setsignupbool(response.data);
     } catch (error) {
       console.error(error);
     }
   }
-
   return (
     <div
       className={theme % 2 === 0 ? classes.mainContLight : classes.mainContDark}
@@ -114,6 +116,7 @@ const SignUp = () => {
       >
         Get on board
       </h1>
+      {console.log(signupbool)}
       <form className={classes.FormContent}>
         <input
           className={theme % 2 !== 0 ? classes.inputLight : classes.inputDark}

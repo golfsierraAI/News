@@ -1,6 +1,6 @@
 import Login from "./Login";
 import SignUp from "./SignUp";
 const WelcomePage = () => {
-  return <>{false ? <Login /> : <SignUp />}</>;
+  return <>{true ? <Login /> : <SignUp />}</>;
 };
 export default WelcomePage;

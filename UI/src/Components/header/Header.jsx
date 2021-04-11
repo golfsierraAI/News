@@ -57,7 +57,7 @@ const Header = () => {
   };
   return (
     <div className={classes.HeaderCont}>
-      <a href="s">
+      <a href="#">
         <MenuIcon
           style={theme % 2 === 0 ? { color: "black" } : { color: "white" }}
           fontSize="large"

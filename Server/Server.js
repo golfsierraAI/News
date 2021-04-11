@@ -18,13 +18,14 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.post("/signUp", (req, res) => {
-  const b = user.exists({ Email: req.body.Email }, (err, result) => {
+  user.exists({ Email: req.body.Email }, (err, result) => {
     if (err) {
       console.log(err);
       return;
     } else {
       if (result) {
         res.send(false);
+        console.log("Not Added");
       } else {
         const newUser = new user({
           Firstname: req.body.Firstname,
@@ -40,4 +41,21 @@ app.post("/signUp", (req, res) => {
     }
   });
 });
-app.post("/userInfo", (req, res) => {}).listen(8080);
+app
+  .post("/Login", (req, res) => {
+    user.exists({ Email: req.body.Email }, (err, result) => {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        user.findOne({ Email: req.body.Email }, (err, resultFind) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.send(req.body.Password === resultFind.Password);
+          }
+        });
+      }
+    });
+  })
+  .listen(8080);
