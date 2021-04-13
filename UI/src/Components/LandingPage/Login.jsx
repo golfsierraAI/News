@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import SignupDark from "../../Assets/SignupDark.svg";
 import SignupLight from "../../Assets/SignupLight.svg";
 import { useState } from "react";
+import HomePage from "../HomePage/HomePage";
 const useStyles = makeStyles({
   mainContDark: {
     height: "100vh",
@@ -96,7 +97,7 @@ const Login = () => {
       console.error(error);
     }
   }
-  return !signupbool ? (
+  return signupbool ? (
     <div
       className={theme % 2 === 0 ? classes.mainContLight : classes.mainContDark}
     >
@@ -143,6 +144,8 @@ const Login = () => {
         </Button>
       </form>
     </div>
-  ) : null;
+  ) : (
+    <HomePage />
+  );
 };
 export default Login;
