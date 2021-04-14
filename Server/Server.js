@@ -65,7 +65,7 @@ app
     var options = {
       lang: "en",
       category: "national",
-      numOfResults: 40,
+      numOfResults: 25,
       click: true,
     };
     inshorts.get(options, function (result) {

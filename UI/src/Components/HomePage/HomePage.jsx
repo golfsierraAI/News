@@ -2,16 +2,21 @@ import Header from "../header/Header";
 import { makeStyles } from "@material-ui/core/styles";
 import NewsCont from "./NewsCont";
 const useStyles = makeStyles({
-  container: {
-    height: "100vh",
-  },
+  // container: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   height: "90vh",
+  // },
 });
 var HomePage = () => {
   var classes = useStyles();
   return (
     <div>
       <Header />
-      <NewsCont />
+      <div className={classes.container}>
+        <NewsCont />
+      </div>
     </div>
   );
 };
