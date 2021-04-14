@@ -64,7 +64,7 @@ app
   .post("/home", (req, res) => {
     var options = {
       lang: "en",
-      category: "national",
+      category: "entertainment",
       numOfResults: 25,
       click: true,
     };
